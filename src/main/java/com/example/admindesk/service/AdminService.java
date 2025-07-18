@@ -57,11 +57,11 @@ public class AdminService {
     }
 
     public boolean hrExistsByEmail(String email) {
-        return ihrRepository.findByEmail(email).isPresent();
+        return ihrRepository.findByEmail(email) != null;
     }
 
     public boolean ManagerExistsByEmail(String email){
-        return iManagerRepository.findByEmail(email).isPresent();
+        return iManagerRepository.findByEmail(email) != null;
     }
 
 }

@@ -68,7 +68,7 @@ public class AdminController {
                     break;
 
                 case "MANAGER":
-                    Manager manager = managerService.loginManger(email, passWord);
+                    Manager manager = managerService.loginManager(email, passWord);
                     if (manager != null) {
                         model.addAttribute("name", manager.getName());
                         model.addAttribute("role", role);
