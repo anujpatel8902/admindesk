@@ -17,8 +17,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.web.bind.annotation.ResponseBody;
 import java.time.LocalDate;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.springframework.web.servlet.support.RequestContextUtils;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -37,7 +47,7 @@ public class AdminController {
     @Autowired
     EmployeeService employeeService;
     // Show login page
-    @GetMapping("/login")
+    @GetMapping("/**")
     public String showLoginPage() {
         return "login";
     }
@@ -98,57 +108,24 @@ public class AdminController {
         return "redirect:/admin/login";
     }
 
-    @GetMapping("/addEmployee")
-    public String showAddHRForm() {
-        return "addHr";
+    @GetMapping("/addHR")
+    public String showAddHRForm(HttpSession session) {
+        System.out.println("SESSION SUCCESS: " + session.getAttribute("success"));
+        return "addHR";
     }
 
-    @PostMapping("/addHR")
-    public String addHr(@RequestParam(required = false) String name,
-                        @RequestParam(required = false) String email,
-                        @RequestParam(required = false) String password,
-                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dob,
-                        @RequestParam(required = false) String designation,
-                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate joiningDate,
-                        Model model) {
-
+    @PostMapping("/saveHR")
+    @ResponseBody
+    public ResponseEntity<Map<String, String>> saveHR(@ModelAttribute HR hr) {
+        Map<String, String> response = new HashMap<>();
         try {
-            if (designation != null && designation.equalsIgnoreCase("HR")) {
-                if (adminService.hrExistsByEmail(email)) {
-                    model.addAttribute("error", "Email already exists!");
-                    return "addHr";
-                }
-                HR hr = adminService.addHr(name, email, password, dob, designation, joiningDate);
-                if (hr != null) {
-                    model.addAttribute("success", "Data saved successfully!");
-                    return "addHr";
-                } else {
-                    model.addAttribute("error", "Something went wrong!");
-                    return "addHr";
-                }
-            } else if (designation != null && designation.equalsIgnoreCase("Manager")) {
-                if (adminService.ManagerExistsByEmail(email)) {
-                    model.addAttribute("error", "Email already exists!");
-                    return "addHr";
-                }
-                Manager manager = adminService.addManager(name, email, password, dob, designation, joiningDate);
-                if (manager != null) {
-                    model.addAttribute("success", "Data saved successfully");
-                    return "addHr";
-                } else {
-                    model.addAttribute("error", "Something went wrong!");
-                    return "addHr";
-                }
-            } else {
-                model.addAttribute("error", "Something went wrong!");
-                return "addHr";
-            }
-        }catch (Exception e){
-            log.info("Inside @class AdminController and @method addHr e {}",e.getStackTrace());
-            model.addAttribute("error", "Something went wrong!");
-            return "addHr";
+            // TODO: Add your HR saving logic here
+            response.put("success", "Data saved successfully!");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            response.put("error", "Failed to save HR: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
-
     }
 
 

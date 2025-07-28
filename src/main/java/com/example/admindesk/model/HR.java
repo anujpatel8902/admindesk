@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Data
@@ -13,9 +14,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Table(name = "hr")
 public class HR {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false)
     private String name;
@@ -26,10 +29,10 @@ public class HR {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate joiningDate;
 
-    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dob;
 
     @Column(nullable = false)
