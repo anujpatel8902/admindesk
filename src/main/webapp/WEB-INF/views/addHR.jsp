@@ -102,10 +102,19 @@
     </style>
 </head>
 <body>
-
+    <c:if test="${not empty success}">
+        <script>
+            alert("${success}");
+        </script>
+    </c:if>
+    <c:if test="${not empty error}">
+        <script>
+            alert("${error}");
+        </script>
+    </c:if>
     <div class="form-card">
         <h2>Add HR</h2>
-        <form id="addHRForm" action="${pageContext.request.contextPath}/admin/saveHR" method="post">
+        <form action="${pageContext.request.contextPath}/admin/addHR" method="post">
             <label for="name">Name:</label>
             <input class="form-field" type="text" name="name" id="name" required />
 
@@ -121,6 +130,7 @@
             <label for="designation">Designation:</label>
             <select class="form-field" name="designation" id="designation" required>
                 <option value="HR">HR</option>
+                <option value="Manager">Manager</option>
             </select>
 
             <label for="joiningDate">Joining Date:</label>
@@ -129,26 +139,5 @@
             <button type="submit" class="custom-btn">Save</button>
         </form>
     </div>
-    <script>
-    document.getElementById('addHRForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const form = e.target;
-        const data = new FormData(form);
-        fetch(form.action, {
-            method: 'POST',
-            body: data
-        })
-        .then(response => response.json())
-        .then(result => {
-            if(result.success) {
-                alert(result.success);
-                form.reset();
-            } else if(result.error) {
-                alert(result.error);
-            }
-        })
-        .catch(() => alert('Something went wrong!'));
-    });
-    </script>
 </body>
 </html>
