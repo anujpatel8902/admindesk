@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class HR {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false)
     private String name;
