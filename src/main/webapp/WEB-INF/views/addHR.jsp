@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Add Employee</title>
+    <title>Add Hr</title>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -102,16 +102,25 @@
     </style>
 </head>
 <body>
-    <c:if test="${not empty success}">
-        <script>
-            alert("${success}");
-        </script>
-    </c:if>
-    <c:if test="${not empty error}">
-        <script>
-            alert("${error}");
-        </script>
-    </c:if>
+   <c:if test="${not empty sessionScope.success}">
+       <script>
+           window.onload = function () {
+               alert("${sessionScope.success}");
+               // Remove from session using fetch (asynchronous)
+               fetch('${pageContext.request.contextPath}/clear-message');
+           };
+       </script>
+   </c:if>
+
+   <c:if test="${not empty sessionScope.error}">
+       <script>
+           window.onload = function () {
+               alert("${sessionScope.error}");
+               fetch('${pageContext.request.contextPath}/clear-message');
+           };
+       </script>
+   </c:if>
+
     <div class="form-card">
         <h2>Add HR</h2>
         <form action="${pageContext.request.contextPath}/admin/addHR" method="post">
@@ -130,7 +139,6 @@
             <label for="designation">Designation:</label>
             <select class="form-field" name="designation" id="designation" required>
                 <option value="HR">HR</option>
-                <option value="Manager">Manager</option>
             </select>
 
             <label for="joiningDate">Joining Date:</label>

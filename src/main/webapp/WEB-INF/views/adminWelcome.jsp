@@ -46,7 +46,7 @@
 <body>
     <div class="container">
         <h2>Welcome, Admin!</h2>
-        <form action="/admin/add-hr" method="get">
+        <form action="/admin/addHR" method="get">
             <button type="submit" class="action-btn">Add HR</button>
         </form>
         <form action="/admin/check-leave" method="get">

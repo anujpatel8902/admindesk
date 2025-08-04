@@ -98,12 +98,13 @@ public class AdminController {
         return "redirect:/admin/login";
     }
 
-    @GetMapping("/addEmployee")
+    @GetMapping("/addHR")
     public String showAddHRForm() {
-        return "addHr";
+        log.info("Inside @class AdminController @Method showAddHRForm");
+        return "addHR";
     }
 
-    @PostMapping("/addHR")
+    @PostMapping("/addHR-sgs")
     public String addHr(@RequestParam(required = false) String name,
                         @RequestParam(required = false) String email,
                         @RequestParam(required = false) String password,
