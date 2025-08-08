@@ -102,28 +102,28 @@
     </style>
 </head>
 <body>
-   <c:if test="${not empty sessionScope.success}">
+    <%-- DEBUG: success = ${success}, error = ${error} --%>
+   <%-- Remove alert popups, show messages as styled divs --%>
+   <c:if test="${not empty success and success ne ''}">
+       <div style="background:#d4edda;color:#155724;padding:12px 18px;margin-bottom:18px;border-radius:6px;border:1px solid #c3e6cb;">
+           ${success}
+       </div>
        <script>
-           window.onload = function () {
-               alert("${sessionScope.success}");
-               // Remove from session using fetch (asynchronous)
-               fetch('${pageContext.request.contextPath}/clear-message');
-           };
+           alert("${success}");
        </script>
    </c:if>
-
-   <c:if test="${not empty sessionScope.error}">
+   <c:if test="${not empty error and error ne ''}">
+       <div style="background:#f8d7da;color:#721c24;padding:12px 18px;margin-bottom:18px;border-radius:6px;border:1px solid #f5c6cb;">
+           ${error}
+       </div>
        <script>
-           window.onload = function () {
-               alert("${sessionScope.error}");
-               fetch('${pageContext.request.contextPath}/clear-message');
-           };
+           alert("${error}");
        </script>
    </c:if>
 
     <div class="form-card">
         <h2>Add HR</h2>
-        <form action="${pageContext.request.contextPath}/admin/addHR" method="post">
+        <form action="${pageContext.request.contextPath}/admin/addHR-data" method="post">
             <label for="name">Name:</label>
             <input class="form-field" type="text" name="name" id="name" required />
 

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 
@@ -104,52 +105,52 @@ public class AdminController {
         return "addHR";
     }
 
-    @PostMapping("/addHR-sgs")
+    @PostMapping("/addHR-data")
     public String addHr(@RequestParam(required = false) String name,
                         @RequestParam(required = false) String email,
                         @RequestParam(required = false) String password,
                         @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dob,
                         @RequestParam(required = false) String designation,
                         @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate joiningDate,
-                        Model model) {
+                        RedirectAttributes redirectAttributes) {
+        log.info("Inside @class AdminController @Method showAddHRForm email {}",email);
 
         try {
             if (designation != null && designation.equalsIgnoreCase("HR")) {
                 if (adminService.hrExistsByEmail(email)) {
-                    model.addAttribute("error", "Email already exists!");
-                    return "addHr";
+                    redirectAttributes.addFlashAttribute("error", "Email already exists!");
+                    return "redirect:/admin/addHR";
                 }
                 HR hr = adminService.addHr(name, email, password, dob, designation, joiningDate);
                 if (hr != null) {
-                    model.addAttribute("success", "Data saved successfully!");
-                    return "addHr";
+                    redirectAttributes.addFlashAttribute("success", "Data saved successfully!");
+                    return "redirect:/admin/addHR";
                 } else {
-                    model.addAttribute("error", "Something went wrong!");
-                    return "addHr";
+                    redirectAttributes.addFlashAttribute("error", "Something went wrong!");
+                    return "redirect:/admin/addHR";
                 }
             } else if (designation != null && designation.equalsIgnoreCase("Manager")) {
                 if (adminService.ManagerExistsByEmail(email)) {
-                    model.addAttribute("error", "Email already exists!");
-                    return "addHr";
+                    redirectAttributes.addFlashAttribute("error", "Email already exists!");
+                    return "redirect:/admin/addHR";
                 }
                 Manager manager = adminService.addManager(name, email, password, dob, designation, joiningDate);
                 if (manager != null) {
-                    model.addAttribute("success", "Data saved successfully");
-                    return "addHr";
+                    redirectAttributes.addFlashAttribute("success", "Data saved successfully");
+                    return "redirect:/admin/addHR";
                 } else {
-                    model.addAttribute("error", "Something went wrong!");
-                    return "addHr";
+                    redirectAttributes.addFlashAttribute("error", "Something went wrong!");
+                    return "redirect:/admin/addHR";
                 }
             } else {
-                model.addAttribute("error", "Something went wrong!");
-                return "addHr";
+                redirectAttributes.addFlashAttribute("error", "Something went wrong!");
+                return "redirect:/admin/addHR";
             }
         }catch (Exception e){
             log.info("Inside @class AdminController and @method addHr e {}",e.getStackTrace());
-            model.addAttribute("error", "Something went wrong!");
-            return "addHr";
+            redirectAttributes.addFlashAttribute("error", "Something went wrong!");
+            return "redirect:/admin/addHR";
         }
-
     }
 
 
