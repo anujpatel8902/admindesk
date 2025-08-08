@@ -100,8 +100,9 @@ public class AdminController {
     }
 
     @GetMapping("/addHR")
-    public String showAddHRForm() {
+    public String showAddHRForm(Model model) {
         log.info("Inside @class AdminController @Method showAddHRForm");
+        model.addAttribute("showForm",false);
         return "addHR";
     }
 

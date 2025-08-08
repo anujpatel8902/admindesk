@@ -109,17 +109,23 @@
            ${success}
        </div>
        <script>
-           alert("${success}");
+           if ("${success}" && "${success}".trim() !== "") {
+               alert("${success}");
+           }
        </script>
    </c:if>
+
    <c:if test="${not empty error and error ne ''}">
        <div style="background:#f8d7da;color:#721c24;padding:12px 18px;margin-bottom:18px;border-radius:6px;border:1px solid #f5c6cb;">
            ${error}
        </div>
        <script>
-           alert("${error}");
+           if ("${error}" && "${error}".trim() !== "") {
+               alert("${error}");
+           }
        </script>
    </c:if>
+
 
     <div class="form-card">
         <h2>Add HR</h2>
