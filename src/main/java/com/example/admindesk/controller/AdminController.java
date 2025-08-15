@@ -130,20 +130,7 @@ public class AdminController {
                     redirectAttributes.addFlashAttribute("error", "Something went wrong!");
                     return "redirect:/admin/addHR";
                 }
-            } else if (designation != null && designation.equalsIgnoreCase("Manager")) {
-                if (adminService.ManagerExistsByEmail(email)) {
-                    redirectAttributes.addFlashAttribute("error", "Email already exists!");
-                    return "redirect:/admin/addHR";
-                }
-                Manager manager = adminService.addManager(name, email, password, dob, designation, joiningDate);
-                if (manager != null) {
-                    redirectAttributes.addFlashAttribute("success", "Data saved successfully");
-                    return "redirect:/admin/addHR";
-                } else {
-                    redirectAttributes.addFlashAttribute("error", "Something went wrong!");
-                    return "redirect:/admin/addHR";
-                }
-            } else {
+            }  else {
                 redirectAttributes.addFlashAttribute("error", "Something went wrong!");
                 return "redirect:/admin/addHR";
             }
@@ -163,5 +150,10 @@ public class AdminController {
     @GetMapping("/Service")
     public String isService(){
         return "Service is up";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "redirect:/admin/welcome";
     }
 }

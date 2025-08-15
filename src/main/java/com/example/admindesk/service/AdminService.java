@@ -43,18 +43,7 @@ public class AdminService {
         return ihrRepository.save(hr);
     }
 
-    public Manager addManager(String name, String email, String passWord, LocalDate dob, String designation, LocalDate joiningDate){
-        Manager manager=new Manager();
-        manager.setName(name);
-        manager.setEmail(email);
-        manager.setPassword(passWord);
-        manager.setDob(dob);
-        manager.setDesignation(designation);
-        manager.setJoiningDate(joiningDate);
-        Admin admin=adminRepository.findById(1).orElse(null);
-        manager.setAdmin(admin);
-        return iManagerRepository.save(manager);
-    }
+
 
     public boolean hrExistsByEmail(String email) {
         return ihrRepository.findByEmail(email) != null;

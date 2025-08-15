@@ -41,18 +41,40 @@
         button:hover {
             background: #357ABD;
         }
+        .logout-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .logout-btn {
+            background: #f44336;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
+    <div class="logout-container">
+        <form action="/admin/logout" method="get">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
     <div class="container">
         <h2>Welcome, HR!</h2>
-        <form action="/admin/add-employee" method="get">
+        <form action="/hr/add-employee" method="get">
             <button type="submit">Add Employee</button>
         </form>
-        <form action="/admin/check-leave" method="get">
+        <form action="/hr/add-manager" method="get">
+                    <button type="submit">Add Manager</button>
+         </form>
+        <form action="/hr/check-leave" method="get">
             <button type="submit">Check Leave</button>
         </form>
-        <form action="/admin/apply-leave" method="get">
+        <form action="/hr/apply-leave" method="get">
             <button type="submit">Apply for Leave</button>
         </form>
     </div>

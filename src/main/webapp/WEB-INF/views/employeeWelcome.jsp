@@ -41,9 +41,28 @@
         button:hover {
             background: #5B73E8;
         }
+        .logout-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .logout-btn {
+            background: #f44336;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
+    <div class="logout-container">
+        <form action="/admin/logout" method="get">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
     <div class="container">
         <h2>Welcome, Employee!</h2>
         <form action="/admin/apply-leave" method="get">
