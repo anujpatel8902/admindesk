@@ -53,7 +53,7 @@ public class AdminController {
                 case "ADMIN":
                     Admin admin = adminService.loginAdmin(email, passWord);
                     if (admin != null) {
-                        model.addAttribute("name", admin.getName());
+                        model.addAttribute("adminName", admin.getName());
                         model.addAttribute("role", role);
                         welcomePage = "adminWelcome";
                     }

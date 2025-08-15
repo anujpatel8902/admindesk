@@ -87,5 +87,17 @@
         <button type="submit">Login</button>
     </form>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const emailInput = document.getElementById('email');
+        if (emailInput) {
+            emailInput.value = '';
+        }
+        const passwordInput = document.getElementById('password');
+        if (passwordInput) {
+            passwordInput.value = '';
+        }
+    });
+</script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Admin Welcome</title>
+    <title>${adminName} Welcome</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -45,7 +45,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Welcome, Admin!</h2>
+        <h2>Welcome, ${adminName}!</h2>
         <form action="/admin/addHR" method="get">
             <button type="submit" class="action-btn">Add HR</button>
         </form>
